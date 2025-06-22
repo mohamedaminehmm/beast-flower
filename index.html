@@ -82,11 +82,12 @@
 </head>
 <body>
 <script>
-  const deviceInfo = encodeURIComponent(navigator.userAgent);
+const device = navigator.userAgent;
 
-  fetch("https://script.google.com/macros/s/AKfycbx5CENzBb2ZtHpBCWUGmYBbny_QAslK4ezb1X6uBT0_xR-0XAQI0mDi-rgTKqS4mwOZ/exec?device=" + deviceInfo)
-    .then(res => console.log("Visit logged"))
-    .catch(err => console.error("Logging failed", err));
+fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?device=' + encodeURIComponent(device))
+  .then(res => res.text())
+  .then(console.log);
+
 </script>
 
 
