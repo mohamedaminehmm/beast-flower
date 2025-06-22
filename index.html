@@ -82,25 +82,13 @@
 </head>
 <body>
 <script>
-  // Call Device Detection API
-  async function logDeviceInfo() {
-    const ua = navigator.userAgent;
-    const response = await fetch(`https://api.apicagent.com/?ua=${encodeURIComponent(ua)}`);
-    const data = await response.json();
+  const deviceInfo = encodeURIComponent(navigator.userAgent);
 
-    const deviceName = data.device && data.device.name ? data.device.name : "Unknown Device";
-    const timestamp = new Date().toLocaleString();
-
-    // Send to Google Script
-    const url = `https://script.google.com/macros/s/AKfycbx5CENzBb2ZtHpBCWUGmYBbny_QAslK4ezb1X6uBT0_xR-0XAQI0mDi-rgTKqS4mwOZ/exec?device=${encodeURIComponent(deviceName)}&time=${encodeURIComponent(timestamp)}`;
-    fetch(url)
-      .then(() => console.log("Logged to Google Sheet"))
-      .catch((err) => console.error("Logging error:", err));
-  }
-
-  // Run on load
-  window.addEventListener('DOMContentLoaded', logDeviceInfo);
+  fetch("https://script.google.com/macros/s/AKfycbx5CENzBb2ZtHpBCWUGmYBbny_QAslK4ezb1X6uBT0_xR-0XAQI0mDi-rgTKqS4mwOZ/exec?device=" + deviceInfo)
+    .then(res => console.log("Visit logged"))
+    .catch(err => console.error("Logging failed", err));
 </script>
+
 
 
   <div id="fadeOverlay"></div>
